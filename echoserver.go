@@ -11,7 +11,6 @@ package main
 import (
 	"fmt"
 	"io"
-	"log"
 	"net"
 )
 
@@ -26,7 +25,7 @@ func handleConnection(chanBuffer chan net.Conn) {
 	for conn := range chanBuffer {
 		written, err := io.Copy(conn, conn)
 		if err != nil {
-			log.Printf("Err echo: " + err.Error())
+			fmt.Println("Err echo: " + err.Error())
 			continue
 		}
 		bytesEchoed += written
@@ -52,7 +51,7 @@ func main() {
 	for {
 		conn, err := ln.Accept()
 		if err != nil {
-			log.Printf("Err accept: " + err.Error())
+			fmt.Println("Err accept: " + err.Error())
 			continue
 		}
 		fmt.Println("Connection opened...")
